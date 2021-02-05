@@ -15,6 +15,46 @@ from mixnet.mixcrypt import MixCrypt
 from mixnet.models import Auth
 from voting.models import Voting, Question, QuestionOption
 
+class VotingModel(BaseTestCase):
+    def setUp(self):
+        q = Question(desc="Descripcion de prueba")
+        q.save
+
+        opt1 = QuestionOption(question=q, option="Es la 1")
+        opt2 = QuestionOption(question=q, option="Es la 2")
+        opt1.save
+        opt2.save
+
+        self.v=Voting(name="Votacion prueba", question=q)
+        self.v.save
+        super.setUp()
+
+    def tearDown(self):
+        super().tearDown()
+        self.v = None
+
+    def voteExist(self):
+        v = Voting.objects.get(name="Votacion prueba")
+
+        ent = 1
+        for ops in v.question.options.all():
+            self.assertEquals(ops, "Es la " + str(ent))
+            ent = ent + 1
+
+    def createVotingAPI(self):
+        self.login()
+        data = {
+            'name': "Ejemplo",
+            'descripcion': "Prueba",
+            'question': 'Mmmmmm?',
+            'question_opt': ['op1', 'op2', 'op3']
+        }
+
+        response = self.client.post("/voting/", data, format='json')
+        self.assertEquals(response.status_code, 201)
+
+        v = Voting.objects.get(name="Ejemplo")
+        self.assertEquals(v.desc, "Prueba")
 
 class VotingTestCase(BaseTestCase):
 
@@ -23,6 +63,12 @@ class VotingTestCase(BaseTestCase):
 
     def tearDown(self):
         super().tearDown()
+    
+    def test_Voting_toString(self):
+        v = self.create_voting()
+        self.assertEquals(str(v),"test voting")
+        self.assertEquals(str(v.question),"test question")
+        self.assertEquals(str(v.question.options.all()[0]),"option 1 (2)")
 
     def encrypt_msg(self, msg, v, bits=settings.KEYBITS):
         pk = v.pub_key
