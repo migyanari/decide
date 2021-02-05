@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 options = webdriver.FirefoxOptions()
 options.headless = True
-driver = webdriver.Firefox(executable_path="/home/migyanari/01enwindows/decide/decide/geckodriver", options=options)
+driver = webdriver.Firefox(options=options)
 driver.get("https://www.google.com/")
 print('Title: %s' % driver.title)
 driver.quit()
