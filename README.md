@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/migyanari/decide.svg?branch=master)](https://travis-ci.com/migyanari/decide) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d12335917c442b3a687a57e95405036)](https://www.codacy.com/app/migyanari/decide?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=migyanari/decide&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/6d12335917c442b3a687a57e95405036)](https://www.codacy.com/app/migyanari/decide?utm_source=github.com&utm_medium=referral&utm_content=migyanari/decide&utm_campaign=Badge_Coverage)
 
-Plataforma voto electrónico educativa
+Plataforma voto electrónico educativa (prueba)
 =====================================
 
 El objetivo de este proyecto es implementar una plataforma de voto
