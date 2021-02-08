@@ -25,3 +25,9 @@ script:
   - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
   - coverage xml
   - python-codacy-coverage -r coverage.xml
+
+deploy:
+  provider: heroku
+  app: decideyari
+  strategy: git
+  api_key: bc7eec9b-c67a-4b35-843e-e276efe37621
