@@ -4,7 +4,7 @@ services:
   - postgresql
 addons:
   postgresql: "9.4"
-  firefox: stable
+  firefox: "85.0"
 before_script:
   - cp decide/local_settings.travis.py decide/local_settings.py
   - psql -U postgres -c "create user decide password 'decide'"
@@ -18,8 +18,8 @@ install:
   - pip install selenium
   - pip install codacy-coverage
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz
-  - tar -xzf geckodriver-v0.27.0-linux64.tar.gz -C bin
-  - export PATH=$(pwd)/bin:$PATH
+  - tar -xzf geckodriver-v0.27.0-linux64.tar.gz
+  - export PATH=$(pwd):$PATH
 script:
   - cd decide
   - coverage run --branch --source=. ./manage.py test --keepdb --with-xunit
